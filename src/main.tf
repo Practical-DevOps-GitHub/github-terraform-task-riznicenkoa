@@ -10,11 +10,15 @@ terraform {
 provider "github" {
   token = var.github_token
 }
-resource "github_repository" "repo" {
-  name       = "terraform-github-repo"
-  visibility = "private"
-  auto_init  = true
+
+locals {
+  repository = "github-terraform-task-riznicenkoa"
 }
+
+data "github_repository" "repo" {
+  full_name = "riznicenkoa/github-terraform-task-riznicenkoa"
+}
+
 resource "github_repository_collaborator" "collab" {
   repository = github_repository.repo.name
   username   = "softserverdata"
@@ -36,6 +40,29 @@ resource "github_branch_protection" "main" {
   required_pull_request_reviews {
     required_approving_review_count = 1
   }
+terraform {
+  required_providers {
+    github = {
+      source  = "integrations/github"
+      version = "~> 5.0"
+    }
+  }
+}
+
+provider "github" {
+  token = var.github_token
+}
+resource "github_repository" "repo" {
+  name       = "terraform-github-repo"
+  visibility = "private"
+  auto_init  = true
+}
+resource "github_repository_collaborator" "collab" {
+  repository = github_repository.repo.name
+  username   = "softserverdata"
+  permission = "push"
+}
+resource "github_branch" "develop" {
 
   enforce_admins = true
 }
