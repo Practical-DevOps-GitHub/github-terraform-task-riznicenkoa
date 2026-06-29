@@ -15,9 +15,9 @@ locals {
   repository = "github-terraform-task-riznicenkoa"
 }
 
-resource "github_repository_collaborator" "softserverdata" {
+resource "github_repository_collaborator" "softservedata" {
   repository = local.repository
-  username   = "softserverdata"
+  username   = "softservedata"
   permission = "push"
 }
 
