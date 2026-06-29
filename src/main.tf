@@ -40,14 +40,6 @@ resource "github_branch_protection" "main" {
   required_pull_request_reviews {
     required_approving_review_count = 1
   }
-terraform {
-  required_providers {
-    github = {
-      source  = "integrations/github"
-      version = "~> 5.0"
-    }
-  }
-}
 
 provider "github" {
   token = var.github_token
